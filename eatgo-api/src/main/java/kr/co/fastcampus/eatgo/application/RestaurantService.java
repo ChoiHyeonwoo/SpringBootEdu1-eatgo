@@ -43,7 +43,6 @@ public class RestaurantService {
 
     @Transactional
     public Restaurant updateRestaurant(Long id, String name, String address) {
-        //TODO: update Restaurant.......
         Restaurant restaurant = restaurantRepository.findById(id).orElse(null);
         restaurant.updateInformation(name, address);
 
