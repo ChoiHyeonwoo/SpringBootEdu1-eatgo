@@ -13,6 +13,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.hamcrest.Matchers.containsString;
@@ -34,7 +35,12 @@ public class RestaurantControllerTest {
     @Test
     public void list() throws Exception {
         List<Restaurant> restaurants = new ArrayList<>();
-        restaurants.add(new Restaurant(1004L, "JOKER House", "Seoul"));
+        restaurants.add(Restaurant.builder()
+                .id(1004L)
+                .name("JOKER House")
+                .address("Seoul")
+                .build());
+
         given(restaurantService.getRestaurants()).willReturn(restaurants);
 
         mvc.perform(get("/restaurants"))
@@ -49,13 +55,21 @@ public class RestaurantControllerTest {
     }
     @Test
     public void detail() throws Exception {
-        Restaurant restaurant1 = new Restaurant(1004L, "JOKER House", "Seoul");
-        Restaurant restaurant2 = new Restaurant(2020L, "Cyber Food", "Seoul");
+        Restaurant restaurant1 = Restaurant.builder()
+                                .id(1004L)
+                                .name("JOKER House")
+                                .address("Seoul")
+                                .build();
+        Restaurant restaurant2 = Restaurant.builder()
+                                .id(2020L)
+                                .name("Cyber Food")
+                                .address("Seoul")
+                                .build();
 
-        List<MenuItem> menuItems = new ArrayList<>();
-        menuItems.add(new MenuItem("Kimchi"));
+        restaurant1.setMenuItem(Arrays.asList(MenuItem.builder()
+                                    .name("Kimchi")
+                                    .build()));
 
-        restaurant1.setMenuItem(menuItems);
         given(restaurantService.getRestaurant(1004L)).willReturn(restaurant1);
         given(restaurantService.getRestaurant(2020L)).willReturn(restaurant2);
 
