@@ -31,11 +31,11 @@ public class MenuItemServiceTests {
     @Test
     public void bulkUpdate(){
         List<MenuItem> menuItems = new ArrayList<>();
-        menuItems.add(MenuItem.builder().name("Kimchi").build());
+        menuItems.add(MenuItem.builder().name("Kimchi").build()); // C
 
-        menuItems.add(MenuItem.builder().id(12L).name("Gukbob").build());
+        menuItems.add(MenuItem.builder().id(12L).name("Gukbob").build()); // U
 
-        menuItems.add(MenuItem.builder().id(1004L).destroy(true).build());
+        menuItems.add(MenuItem.builder().id(1004L).destroy(true).build()); // D
 
         menuItemService.bulkUpdate(1L, menuItems);
 
