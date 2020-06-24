@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.List;
 
-@Service //testtest
+@Service
 public class RestaurantService {
 
     private RestaurantRepository restaurantRepository;
