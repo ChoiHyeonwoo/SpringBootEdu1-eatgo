@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service
+@Service //PR 테스트
 public class MenuItemService {
 
     private MenuItemRepository menuItemRepository;
