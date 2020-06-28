@@ -10,7 +10,6 @@ import java.util.List;
 @Service
 public class RegionService {
 
-
     private RegionRepository regionRepository;
 
     @Autowired
