@@ -26,6 +26,10 @@ public class User {
     @Setter
     private String email;
 
+    @NotEmpty
+    @Setter
+    private String password;
+
     @NotNull
     @Setter
     private Long level;
