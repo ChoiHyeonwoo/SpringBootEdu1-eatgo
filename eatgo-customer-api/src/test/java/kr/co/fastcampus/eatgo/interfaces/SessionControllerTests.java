@@ -3,6 +3,7 @@ package kr.co.fastcampus.eatgo.interfaces;
 import kr.co.fastcampus.eatgo.application.EmailNotExistedException;
 import kr.co.fastcampus.eatgo.application.PasswordWrongException;
 import kr.co.fastcampus.eatgo.application.UserService;
+import kr.co.fastcampus.eatgo.domain.User;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,13 +54,21 @@ public class SessionControllerTests {
     }
     @Test
     public void createWithValidAttribute() throws Exception {
+        String email = "tester@example.com";
+        String password = "test";
+
+        User mockUser = User.builder().password("ACCESSTOKEN").build();
+
+        given(userService.authenticate(email, password)).willReturn(mockUser);
         mvc.perform(post("/session")
+
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("{\"email\" : \"tester@example.com\", \"password\" : \"test\"}"))
                 .andExpect(status().isCreated())
                 .andExpect(header().string("location", "/session"))
                 .andExpect(content().string("{\"accessToken\":\"ACCESSTOKEN\"}"));
-        verify(userService).authenticate(eq("tester@example.com"), eq("test"));
+
+        verify(userService).authenticate(eq(email), eq(password));
     }
 
 }
