@@ -17,7 +17,7 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @PostMapping
+    @PostMapping("/users")
     public ResponseEntity<?> create(@RequestBody User resource) throws URISyntaxException {
         String email = resource.getEmail();
         String name = resource.getName();
